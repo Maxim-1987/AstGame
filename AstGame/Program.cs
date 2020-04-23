@@ -15,8 +15,7 @@ namespace AsteroidGame
             Application.SetCompatibleTextRenderingDefault(false);
 
 
-            Form game_form = new Form();
-            //Screen.PrimaryScreen.WorkingArea.Height
+            Form game_form = new Form();            
             game_form.Width = 800;
             game_form.Height = 600;
 
@@ -26,10 +25,7 @@ namespace AsteroidGame
             Game.Load();
             Game.Draw();
 
-            Application.Run(game_form);
-
-            //System.Threading.Thread.Sleep(10000);
-            //Application.Run();
+            Application.Run(game_form);            
         }
     }
 }

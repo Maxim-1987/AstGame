@@ -22,13 +22,8 @@ namespace AsteroidGame
 
         public virtual void Draw(Graphics g)
         {
-            g.DrawEllipse(
-                Pens.White,
-                _Position.X, _Position.Y,
-                _Size.Width, _Size.Height
-                );
+            g.DrawEllipse(Pens.White,_Position.X, _Position.Y,_Size.Width, _Size.Height);
         }
-
         public virtual void Update()
         {
             _Position.X += _Direction.X;
