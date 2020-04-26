@@ -17,6 +17,7 @@ namespace Employee
         public override void PaymentCalculation()
         {
             _MonthlyPayment = _Rate;
+            Console.WriteLine(_Name + "|" + "<Id>" + _Id + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
     }
 }

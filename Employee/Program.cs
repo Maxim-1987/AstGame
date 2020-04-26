@@ -21,8 +21,12 @@ namespace Employee
                 HourlyPayment hp = new HourlyPayment(rate, id, name);
                 hp.PaymentCalculation();
             }
-            else
+            if (id == 2)
+            {
                 FixedPayment fp = new FixedPayment(rate, id, name);
+                fp.PaymentCalculation();
+            }
+                
             Console.ReadLine();
             
         }
