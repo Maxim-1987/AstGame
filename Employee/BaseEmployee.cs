@@ -11,9 +11,9 @@ namespace Employee
         public int _Rate { get; private set; }
         public int _Id { get; private set; }
         public string _Name { get; private set; }
-        public double _MonthlyPayment { get; set; }
+        public float _MonthlyPayment { get; set; }        
 
-        protected BaseEmployee(int rate, int id, string name)
+    protected BaseEmployee(int rate, int id, string name)
         {
             _Rate = rate;
             _Id = id;

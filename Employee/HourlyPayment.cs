@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Employee
 {
-     public class HourlyPayment : BaseEmployee
+      class HourlyPayment : BaseEmployee
     {
-        private const double daysMonth = 20.8;
+        private const float daysMonth = 20.8f;
         private const int workingHours = 8;
-        private const int rate = 80;
+        //private const int rate = 85;
 
         public HourlyPayment(int rate, int id, string name)
             : base(rate,  id,  name)
@@ -19,7 +19,7 @@ namespace Employee
         }
         public override void PaymentCalculation()
         {
-            _MonthlyPayment = (double)(daysMonth * workingHours * rate);
+            _MonthlyPayment = /*(float)*/(daysMonth * workingHours * _Rate);
             Console.WriteLine(_Name + "|" + "<Id>" + _Id + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
         
