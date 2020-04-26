@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
-[assembly: AssemblyTitle("AstGame")]
+[assembly: AssemblyTitle("AsteroidGame")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AstGame")]
+[assembly: AssemblyProduct("AsteroidGame")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("46a3cae7-46a1-48e3-8745-cb7a82f68e01")]
+[assembly: Guid("88fc2408-998d-41f9-9a60-e7f1146d66d7")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
