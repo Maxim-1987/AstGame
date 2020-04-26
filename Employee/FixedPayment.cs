@@ -13,7 +13,6 @@ namespace Employee
         {
 
         }
-
         public override void PaymentCalculation()
         {
             _MonthlyPayment = _Rate;

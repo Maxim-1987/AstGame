@@ -12,15 +12,12 @@ namespace Employee
         public int _Id { get; private set; }
         public string _Name { get; private set; }
         public float _MonthlyPayment { get; set; }        
-
     protected BaseEmployee(int rate, int id, string name)
         {
             _Rate = rate;
             _Id = id;
             _Name = name;            
         }
-
         public abstract void PaymentCalculation();
-
     }
 }

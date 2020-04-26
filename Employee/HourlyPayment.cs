@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 namespace Employee
 {
       class HourlyPayment : BaseEmployee
-    {
+      {
         private const float daysMonth = 20.8f;
         private const int workingHours = 8;
         //private const int rate = 85;
-
         public HourlyPayment(int rate, int id, string name)
             : base(rate,  id,  name)
         {
@@ -23,5 +22,5 @@ namespace Employee
             Console.WriteLine(_Name + "|" + "<Id>" + _Id + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
         
-    }
+      }
 }

@@ -20,7 +20,6 @@ namespace Employee
                 worker.PaymentCalculation();
             }
 
-
             Console.WriteLine("Введите Ваше имя: ");
             string name = Console.ReadLine();
             Console.WriteLine("Введите Ваш id: 1 или 2");
@@ -37,11 +36,8 @@ namespace Employee
                 FixedPayment fp = new FixedPayment(rate, id, name);
                 fp.PaymentCalculation();
             }
-
-            Console.ReadLine();
-            
-        }
- 
+            Console.ReadLine();            
+        } 
     }
 }
 
