@@ -6,8 +6,17 @@ using System.Threading.Tasks;
 
 namespace Employee
 {
-    class FixedPayment
+    public class FixedPayment : BaseEmployee
     {
-        
+        public FixedPayment(int rate, int id, string name)
+            : base(rate, id, name)
+        {
+
+        }
+
+        public override void PaymentCalculation()
+        {
+            _MonthlyPayment = _Rate;
+        }
     }
 }
