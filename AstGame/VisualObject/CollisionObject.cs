@@ -11,7 +11,6 @@ namespace AsteroidGame.VisualObjects
     {
         protected CollisionObject(Point Position, Point Direction, Size Size)
             : base(Position, Direction, Size) { }
-
         public Rectangle Rect
         {
             get
@@ -19,7 +18,6 @@ namespace AsteroidGame.VisualObjects
                 return new Rectangle(_Position, _Size);
             }
         }
-
         public bool CheckCollision(ICollision obj) => Rect.IntersectsWith(obj.Rect);
     }
 }
