@@ -10,7 +10,7 @@ namespace Employee
       {
         private const float daysMonth = 20.8f;
         private const int workingHours = 8;
-        //private const int rate = 85;
+        
         public HourlyPayment(int rate, int id, string name)
             : base(rate,  id,  name)
         {
