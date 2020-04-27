@@ -21,10 +21,6 @@ namespace Employee
             _MonthlyPayment = (daysMonth * workingHours * _Rate);
             Console.WriteLine(_Name + "|" + "<Id>" + _Id.ToString() + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
-        public override string ToString()
-        {
-            return _MonthlyPayment.ToString();
-        }
-
-    }
+       
+      }
 }
