@@ -10,7 +10,7 @@ namespace Employee
     {
          public void EmployeeIn()
         {
-            Console.WriteLine("Введите Ваше имя: ");
+            Console.WriteLine("\nВведите Ваше имя: ");
             string name = Console.ReadLine();
             Console.WriteLine("Введите Ваш id: 1 - часовая ставка или 2 - фиксированная ставка");
             int id = int.Parse(Console.ReadLine());

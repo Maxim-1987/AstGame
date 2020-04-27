@@ -18,5 +18,9 @@ namespace Employee
             _MonthlyPayment = _Rate;
             Console.WriteLine(_Name + "|" + "<Id>" + _Id + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
+        public override string ToString()
+        {
+            return _MonthlyPayment.ToString();
+        }
     }
 }

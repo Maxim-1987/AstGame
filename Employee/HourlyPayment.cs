@@ -18,9 +18,13 @@ namespace Employee
         }
         public override void PaymentCalculation()
         {
-            _MonthlyPayment = /*(float)*/(daysMonth * workingHours * _Rate);
-            Console.WriteLine(_Name + "|" + "<Id>" + _Id + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
+            _MonthlyPayment = (daysMonth * workingHours * _Rate);
+            Console.WriteLine(_Name + "|" + "<Id>" + _Id.ToString() + "|" + "Ваша среднемесячная зарплата составляет: " + _MonthlyPayment);
         }
-        
-      }
+        public override string ToString()
+        {
+            return _MonthlyPayment.ToString();
+        }
+
+    }
 }

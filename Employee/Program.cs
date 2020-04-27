@@ -10,7 +10,7 @@ namespace Employee
     {       
         static void Main(string[] args)
         {
-            Array ar = new Array();
+            ArrayEmp ar = new ArrayEmp();
             ar.ArrayEmployee();
             
             EmployeeInput ei = new EmployeeInput();
