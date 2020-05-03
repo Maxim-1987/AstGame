@@ -23,6 +23,7 @@ namespace AsteroidGame
         private static SpaceShip __SpaceShip;
         private static Timer __Timer;
         private static Random rnd;
+        private static int Score { get; set; } = -1;
 
         /// <summary>Ширина игрового поля</summary>
         public static int Width { get; private set; }
@@ -75,6 +76,8 @@ namespace AsteroidGame
 
         public static void Draw()
         {
+            if (__SpaceShip.Energy <= 0) return;
+
             Graphics g = __Buffer.Graphics;
 
             g.Clear(Color.Black);
@@ -84,6 +87,12 @@ namespace AsteroidGame
 
             __SpaceShip.Draw(g);
             __Bullet?.Draw(g);
+
+            g.DrawString( $"Energy: {__SpaceShip.Energy}, Score: {Score}",
+                new Font(FontFamily.GenericSerif, 14, FontStyle.Italic),
+                Brushes.White,
+                10,
+                Game.Height - 70);
 
             if (!__Timer.Enabled) return;
             __Buffer.Render();
@@ -154,12 +163,20 @@ namespace AsteroidGame
                     __SpaceShip.CheckCollision(collision_object);
 
                     if (__Bullet != null)
+                    {
                         if (__Bullet.CheckCollision(collision_object))
                         {
+                            Score++;
                             __Bullet = null;
                             __GameObjects[i] = null;
                             System.Media.SystemSounds.Beep.Play();
                         }
+                        if (__SpaceShip.CheckCollision(collision_object) && collision_object is MedicineChest medicinechest)
+                        {
+                            __GameObjects[i] = null;
+                        }
+                    }
+                        
                 }
             }
         }

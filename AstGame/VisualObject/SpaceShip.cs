@@ -39,6 +39,10 @@ namespace AsteroidGame.VisualObjects
             {
                 ChangeEnergy(-asteroid.Power);               
             }
+            if (is_collision && obj is MedicineChest medicinechest)
+            {
+                ChangeEnergy(medicinechest.Power);
+            }
             return is_collision;
         }
 
