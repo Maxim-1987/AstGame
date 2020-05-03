@@ -22,6 +22,7 @@ namespace AsteroidGame
         private static Bullet __Bullet;
         private static SpaceShip __SpaceShip;
         private static Timer __Timer;
+        private static Random rnd;
 
         /// <summary>Ширина игрового поля</summary>
         public static int Width { get; private set; }
@@ -33,6 +34,7 @@ namespace AsteroidGame
         /// <param name="form">Игровая форма</param>
         public static void Initialize(Form form)
         {
+            rnd = new Random();
             Width = form.Width;
             Height = form.Height;
 
@@ -47,12 +49,7 @@ namespace AsteroidGame
             form.KeyDown += OnFormKeyDown;
         }
 
-        private static void OnTestButtonClick(object Sender, EventArgs e)
-        {
-            MessageBox.Show("Кнопка нажата!");
-        }
-
-        private static void OnFormKeyDown(object snder, KeyEventArgs e)
+        private static void OnFormKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -93,7 +90,7 @@ namespace AsteroidGame
         }
 
         public static void Load()
-        {
+        {            
             List<VisualObject> game_objects = new List<VisualObject>();
 
             for (var i = 0; i < 10; i++)
@@ -103,7 +100,7 @@ namespace AsteroidGame
                     new Point(-i, 0),
                     10));
             }
-            var rnd = new Random();
+            
             const int asteroid_count = 10;
             const int asteroid_size = 25;
             const int asteroid_max_speed = 20;
@@ -112,6 +109,15 @@ namespace AsteroidGame
                     new Point(rnd.Next(0, Width), rnd.Next(0, Height)),
                     new Point(-rnd.Next(0, asteroid_max_speed), 0),
                     asteroid_size));
+
+            const int med_count = 10;
+            for (var i = 0; i < med_count; i++)
+            {
+                game_objects.Add(new MedicineChest(
+                    new Point(rnd.Next(0, Width), rnd.Next(0, Height)),
+                    new Point(-rnd.Next(1, asteroid_max_speed), 0),
+                    new Size(30, 30)));
+            }
 
             game_objects.Add(new Asteroid(new Point(Width / 2, 200), new Point(-asteroid_max_speed, 0), asteroid_size));
 

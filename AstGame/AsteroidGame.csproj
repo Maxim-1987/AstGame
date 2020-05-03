@@ -55,6 +55,7 @@
     <Compile Include="VisualObject\Bullet.cs" />
     <Compile Include="VisualObject\CollisionObject.cs" />
     <Compile Include="VisualObject\ImageObject.cs" />
+    <Compile Include="VisualObject\MedicineChest.cs" />
     <Compile Include="VisualObject\SpaceShip.cs" />
     <Compile Include="VisualObject\Star.cs" />
     <Compile Include="VisualObject\VisualObject.cs" />
@@ -79,6 +80,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="bin\Debug\src\Apteka.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,7 +11,7 @@ namespace AsteroidGame.VisualObjects
     {
         public event EventHandler Destroyed;
 
-        private int _Energy = 20;
+        private int _Energy = 100;
 
         public int Energy => _Energy;
 
@@ -37,7 +37,7 @@ namespace AsteroidGame.VisualObjects
 
             if (is_collision && obj is Asteroid asteroid)
             {
-                ChangeEnergy(-asteroid.Power);
+                ChangeEnergy(-asteroid.Power);               
             }
             return is_collision;
         }

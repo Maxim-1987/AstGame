@@ -12,6 +12,7 @@ namespace AsteroidGame.VisualObjects
         protected Point _Position;
         protected Point _Direction;
         protected Size _Size;
+        public Rectangle Rect => new Rectangle(_Position, _Size);
 
         protected VisualObject(Point Position, Point Direction, Size Size)
         {

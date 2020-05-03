@@ -63,10 +63,29 @@ namespace AsteroidGame.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Apteka1 {
+            get {
+                object obj = ResourceManager.GetObject("Apteka1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Ast {
             get {
                 object obj = ResourceManager.GetObject("Ast", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на https://www.google.com/url?sa=i&amp;url=https%3A%2F%2Fpngicon.ru%2Fimg-aptechka-227.html&amp;psig=AOvVaw0YTDY6lpjVpbKKgHQDFbqH&amp;ust=1588588734241000&amp;source=images&amp;cd=vfe&amp;ved=0CAIQjRxqFwoTCJjl6avAl-kCFQAAAAAdAAAAABAD.
+        /// </summary>
+        internal static string String {
+            get {
+                return ResourceManager.GetString("String", resourceCulture);
             }
         }
     }
