@@ -21,9 +21,12 @@ namespace AsteroidGame
         private static VisualObject[] __GameObjects;
         private static Bullet __Bullet;
         private static SpaceShip __SpaceShip;
+        private static MedicineChest __MedicineChest;
         private static Timer __Timer;
         private static Random rnd;
-        private static int Score { get; set; } = -1;
+        private delegate void Logger(string str);
+        private static Logger __Logger;
+        public static int Score { get; set; } = -1;
 
         /// <summary>Ширина игрового поля</summary>
         public static int Width { get; private set; }
@@ -122,7 +125,7 @@ namespace AsteroidGame
             const int med_count = 10;
             for (var i = 0; i < med_count; i++)
             {
-                game_objects.Add(new MedicineChest(
+                game_objects.Add(__MedicineChest = new MedicineChest(
                     new Point(rnd.Next(0, Width), rnd.Next(0, Height)),
                     new Point(-rnd.Next(1, asteroid_max_speed), 0),
                     new Size(30, 30)));
@@ -135,6 +138,8 @@ namespace AsteroidGame
 
             __SpaceShip = new SpaceShip(new Point(10, 400), new Point(5, 5), new Size(10, 10));
             __SpaceShip.Destroyed += OnShipDestroyed;
+            __Logger += LoggerConsole;
+            __Logger += LoggerFile;
         }
 
         private static void OnShipDestroyed(object sender, EventArgs e)
@@ -143,6 +148,7 @@ namespace AsteroidGame
             var g = __Buffer.Graphics;
             g.Clear(Color.DarkBlue);
             g.DrawString("Game over!!!", new Font(FontFamily.GenericSerif, 60, FontStyle.Bold), Brushes.Red, 200, 100);
+            __Logger("Игра окончена");
             __Buffer.Render();
         }
 
@@ -161,24 +167,34 @@ namespace AsteroidGame
                     var collision_object = (ICollision)obj;
 
                     __SpaceShip.CheckCollision(collision_object);
-
+                    __MedicineChest.CheckCollision(collision_object);
+               
                     if (__Bullet != null)
                     {
                         if (__Bullet.CheckCollision(collision_object))
                         {
                             Score++;
+                            __Logger("Сбит объект");
                             __Bullet = null;
                             __GameObjects[i] = null;
                             System.Media.SystemSounds.Beep.Play();
+                            __Logger("Астероид уничтожен");
                         }
                         if (__SpaceShip.CheckCollision(collision_object) && collision_object is MedicineChest medicinechest)
                         {
                             __GameObjects[i] = null;
                         }
-                    }
-                        
+                    }                        
                 }
             }
+        }
+        private static void LoggerConsole(string v)
+        {
+            Console.WriteLine("{v}");
+        }
+        private static void LoggerFile(string message)
+        {
+            System.IO.File.AppendAllText("console.txt", $"{message}\r\n");
         }
     }
 }

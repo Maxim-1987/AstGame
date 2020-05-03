@@ -18,6 +18,9 @@ namespace AsteroidGame.VisualObjects
                 return new Rectangle(_Position, _Size);
             }
         }
-        public bool CheckCollision(ICollision obj) => Rect.IntersectsWith(obj.Rect);
+        public bool CheckCollision(ICollision obj)
+        {            
+            return Rect.IntersectsWith(obj.Rect);
+        }
     }
 }
