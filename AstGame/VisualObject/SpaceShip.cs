@@ -8,12 +8,10 @@ using System.Threading.Tasks;
 namespace AsteroidGame.VisualObjects
 {
     internal class SpaceShip : VisualObject, ICollision
-    {
-        public event EventHandler Destroyed;
-
+    {        
         private int _Energy = 100;
-
         public int Energy => _Energy;
+        public event EventHandler Destroyed;
 
         public Rectangle Rect => new Rectangle(_Position, _Size);
 
@@ -50,7 +48,7 @@ namespace AsteroidGame.VisualObjects
         {
             _Energy += delta;
 
-            if (_Energy < 0)
+            if (_Energy == 0)
                 Destroyed?.Invoke(this, EventArgs.Empty);
         }
 
