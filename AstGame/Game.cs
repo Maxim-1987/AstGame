@@ -19,7 +19,7 @@ namespace AsteroidGame
         private static BufferedGraphics __Buffer;
 
         private static VisualObject[] __GameObjects;
-        private static Bullet __Bullet;
+        private static readonly List<Bullet> __Bullets = new List<Bullet>();
         private static SpaceShip __SpaceShip;
         private static MedicineChest __MedicineChest;
         private static Timer __Timer;
@@ -58,7 +58,7 @@ namespace AsteroidGame
             switch (e.KeyCode)
             {
                 case Keys.ControlKey:
-                    __Bullet = new Bullet(__SpaceShip.Rect.Y);
+                    __Bullets.Add(new Bullet(__SpaceShip.Rect.Y));
                     break;
 
                 case Keys.Up:
@@ -89,7 +89,7 @@ namespace AsteroidGame
                 game_object?.Draw(g);
 
             __SpaceShip.Draw(g);
-            __Bullet?.Draw(g);
+            __Bullets.ForEach(bullet => bullet.Draw(g));
 
             g.DrawString( $"Energy: {__SpaceShip.Energy}, Score: {Score}",
                 new Font(FontFamily.GenericSerif, 14, FontStyle.Italic),
@@ -132,8 +132,7 @@ namespace AsteroidGame
             }
 
             game_objects.Add(new Asteroid(new Point(Width / 2, 200), new Point(-asteroid_max_speed, 0), asteroid_size));
-
-            __Bullet = new Bullet(200);
+            
             __GameObjects = game_objects.ToArray();
 
             __SpaceShip = new SpaceShip(new Point(10, 400), new Point(5, 5), new Size(10, 10));
@@ -157,7 +156,10 @@ namespace AsteroidGame
             foreach (var game_object in __GameObjects)
                 game_object?.Update();
 
-            __Bullet?.Update();
+            __Bullets.ForEach(b => b.Update());
+
+            foreach (var bullet_to_remove in __Bullets.Where(b => b.Rect.Left > Width).ToArray())
+                __Bullets.Remove(bullet_to_remove);
 
             for (var i = 0; i < __GameObjects.Length; i++)
             {
@@ -168,14 +170,14 @@ namespace AsteroidGame
 
                     __SpaceShip.CheckCollision(collision_object);
                     __MedicineChest.CheckCollision(collision_object);
-               
-                    if (__Bullet != null)
+
+                    foreach (var bullet in __Bullets.ToArray())
                     {
-                        if (__Bullet.CheckCollision(collision_object))
+                        if (bullet.CheckCollision(collision_object))
                         {
                             Score++;
                             __Logger("Сбит объект");
-                            __Bullet = null;
+                            __Bullets.Remove(bullet);
                             __GameObjects[i] = null;
                             System.Media.SystemSounds.Beep.Play();
                             __Logger("Астероид уничтожен");
