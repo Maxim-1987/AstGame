@@ -13,8 +13,6 @@ namespace AsteroidGame.VisualObjects
         public int Energy => _Energy;
         public event EventHandler Destroyed;
 
-        public Rectangle Rect => new Rectangle(_Position, _Size);
-
         public SpaceShip(Point Position, Point Direction, Size Size)
             : base(Position, Direction, Size)
         {
