@@ -52,14 +52,34 @@ namespace WpfApp
             InitializeComponent();            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ComboBoxDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Departaments.Add(new Departament { Name = "Бухгалтерия" });
+            
         }
+
+        NewEmployee _NewEmployee = new NewEmployee();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _NewEmployee = new NewEmployee();
+            _NewEmployee.Owner = this;
+            _NewEmployee.employee = new Employee();
+            _NewEmployee.departament = new Departament();
+            _NewEmployee.ShowDialog();
+            _NewEmployee.Closed += NewEmployee_WindowClosed;
+            
+        }
+        //private void NewEmployee_WindowClosed(object sender, EventArgs e)
+        //{            
+        //    foreach (var d in Departaments)
+        //    {
+        //        if (d == _NewEmployee.departament)
+        //            d.Employees.Add(new Employee
+        //            {
+        //                Id = d.Employees.Count + 1,                        
+        //                Name = _NewEmployee.employee.Name
+        //            });
+        //    }
+        //}
+
     }
 }

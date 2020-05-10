@@ -1,0 +1,22 @@
+﻿<Window x:Class="WpfApp.NewEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Новый сотрудник" Height="273" Width="319">
+    <Grid>
+        <TextBox x:Name="TexBoxName" HorizontalAlignment="Left" Height="23" Margin="125,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178"/>
+        <TextBlock x:Name="TextBlockName" HorizontalAlignment="Left" Margin="20,57,0,0" TextWrapping="Wrap" Text="Имя сотрудника" VerticalAlignment="Top"/>
+        <ComboBox x:Name="ComboBoxDepartament" HorizontalAlignment="Left" Margin="125,98,0,0" VerticalAlignment="Top" Width="178" >
+            <TextBlock>Департамент финансов</TextBlock>
+            <TextBlock>Департамент по недропользованию</TextBlock>
+            <TextBlock>Судебный департамент</TextBlock>
+            <TextBlock>Департамент здравоохранения</TextBlock>
+        </ComboBox>
+        <TextBlock x:Name="TextBlockDepartament" HorizontalAlignment="Left" Margin="20,105,0,0" TextWrapping="Wrap" Text="Департамент" VerticalAlignment="Top"/>
+        <Button x:Name="ButtonSave" Content="Сохранить" Margin="125,186,112.8,0" Width="75" VerticalAlignment="Top" Click="ButtonSave_Click"/>
+
+    </Grid>
+</Window>
