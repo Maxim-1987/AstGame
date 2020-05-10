@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace WpfApp
 {
@@ -19,12 +20,15 @@ namespace WpfApp
     /// </summary>
     public partial class NewEmployee : Window
     {
-        public Employee employee { get; set; }
-        public Departament departament { get; set; }
+        public Employee Employee { get; set; }
+        public Departament Departament { get; set; }
+
+        MainWindow _MainWindow = new MainWindow();
 
         public NewEmployee()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -34,14 +38,16 @@ namespace WpfApp
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            employee.Name = TexBoxName.Text;
+            Employee.Name = TexBoxName.Text;
             Close();
         }
 
-        //private void ComboBoxDepartament_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ComboBox comboBox = (ComboBox)sender;
-        //    departament = (Departament)comboBox.SelectedItem;
-        //}
+        private void ComboBoxDepartament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //ComboBox comboBox = (ComboBox)sender;
+            //Departament = (Departament)comboBox.SelectedItem;
+        }
+
+
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace WpfApp
 {
@@ -23,10 +24,10 @@ namespace WpfApp
     {        
         public string Name { get; set; }
         public List<Employee> Employees { get; set; }
-        public override string ToString()
-        {
-            return $"Name:{Name}, Employees Count:{Employees.Count}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"Name:{Name}, Employees Count:{Employees.Count}";
+        //}
     }
     public class Employee
     {
@@ -40,34 +41,47 @@ namespace WpfApp
 
     public partial class MainWindow : Window
     {
-        public List<Departament> Departaments = new List<Departament>();
-        public List<Employee> Employees = new List<Employee>();
+        public ObservableCollection<Departament> Departaments;
+        public ObservableCollection<Employee> Employees = new ObservableCollection<Employee>();
 
-        Departament selectedDepartameent = new Departament();
-        Employee selectedEmployee = new Employee();
+        //Departament selectedDepartameent = new Departament();
+        //Employee selectedEmployee = new Employee();
 
         public MainWindow()
         {
-            
-            InitializeComponent();            
+        InitializeComponent();
+            Departaments = new ObservableCollection<Departament>
+            {
+              new Departament {Name = "Департамент финансов" },
+              new Departament {Name = "Департамент по недропользованию" },
+              new Departament {Name = "Судебный департамент" },
+              new Departament {Name = "Департамент здравоохранения" }
+            };
+            ComboBoxDepartment.ItemsSource = Departaments;
+
         }
 
         private void ComboBoxDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
+            //ComboBox comboBox = (ComboBox)sender;
+            //selectedDepartameent = (Departament)comboBox.SelectedItem;
         }
 
         NewEmployee _NewEmployee = new NewEmployee();
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _NewEmployee = new NewEmployee();
-            _NewEmployee.Owner = this;
-            _NewEmployee.employee = new Employee();
-            _NewEmployee.departament = new Departament();
+            _NewEmployee = new NewEmployee
+            {
+                Owner = this,
+                Employee = new Employee(),
+                Departament = new Departament()
+            };
             _NewEmployee.ShowDialog();
-            _NewEmployee.Closed += NewEmployee_WindowClosed;
+            //_NewEmployee.Closed += NewEmployee_WindowClosed;
             
         }
+        
         //private void NewEmployee_WindowClosed(object sender, EventArgs e)
         //{            
         //    foreach (var d in Departaments)
