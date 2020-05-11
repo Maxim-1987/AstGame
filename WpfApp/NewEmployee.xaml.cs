@@ -11,43 +11,37 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 
 namespace WpfApp
 {
     /// <summary>
-    /// Логика взаимодействия для NewEmployee.xaml
+    /// Логика взаимодействия для ChildWindow.xaml
     /// </summary>
     public partial class NewEmployee : Window
     {
-        public Employee Employee { get; set; }
-        public Departament Departament { get; set; }
-
-        MainWindow _MainWindow = new MainWindow();
-
         public NewEmployee()
         {
-            InitializeComponent(); 
-            
+            InitializeComponent();
+        }
+        public Employee employee { get; set; }
+        public Departament departament { get; set; }
+
+        private void buttonSaveEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            employee.Age = Int32.Parse(textBoxAge.Text);
+            employee.Name = textBoxName.Text;
+            Close();
+        }
+
+        private void comboBoxDepartaments_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            departament = (Departament)comboBox.SelectedItem;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
         }
-
-        private void ButtonSave_Click(object sender, RoutedEventArgs e)
-        {
-            Employee.Name = TexBoxName.Text;
-            Close();
-        }
-
-        private void ComboBoxDepartament_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //ComboBox comboBox = (ComboBox)sender;
-            //Departament = (Departament)comboBox.SelectedItem;
-        }
-
-
     }
 }

@@ -5,18 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
-        Title="Новый сотрудник" Height="273" Width="319">
-    <Grid>
-        <TextBox x:Name="TexBoxName" HorizontalAlignment="Left" Height="23" Margin="125,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="178"/>
-        <TextBlock x:Name="TextBlockName" HorizontalAlignment="Left" Margin="20,57,0,0" TextWrapping="Wrap" Text="Имя сотрудника" VerticalAlignment="Top"/>
-        <ComboBox x:Name="ComboBoxDepartament" HorizontalAlignment="Left" Margin="125,98,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="ComboBoxDepartament_SelectionChanged" DisplayMemberPath="Name" >
-            <!--<TextBlock>Департамент финансов</TextBlock>
-            <TextBlock>Департамент по недропользованию</TextBlock>
-            <TextBlock>Судебный департамент</TextBlock>
-            <TextBlock>Департамент здравоохранения</TextBlock>-->
-        </ComboBox>
-        <TextBlock x:Name="TextBlockDepartament" HorizontalAlignment="Left" Margin="20,105,0,0" TextWrapping="Wrap" Text="Департамент" VerticalAlignment="Top"/>
-        <Button x:Name="ButtonSave" Content="Сохранить" Margin="125,186,112.8,0" Width="75" VerticalAlignment="Top" Click="ButtonSave_Click"/>
+        Title="NewEmployee" Height="273" Width="330" Closing="Window_Closing">
+    <Grid Margin="0,0,-2.1,0">
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Margin="80,187,0,0" VerticalAlignment="Top" Width="155" Click="buttonSaveEmployee_Click"/>
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="43,40,0,0" TextWrapping="Wrap" Text="Имя" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Лет" VerticalAlignment="Top" Margin="43,79,0,0" Width="90"/>
+        <TextBox x:Name="textBoxName" Margin="141,40,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120"/>
+        <TextBox x:Name="textBoxAge" HorizontalAlignment="Left" Height="23" Margin="141,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBoxDepartaments" HorizontalAlignment="Left" Margin="141,117,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxDepartaments_SelectionChanged"/>
+        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="46,117,0,0" TextWrapping="Wrap" Text="Департамент" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

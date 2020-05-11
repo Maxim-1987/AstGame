@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,90 +11,179 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
 
 namespace WpfApp
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для DepartmentWindow.xaml
     /// </summary>
 
     public class Departament
-    {        
+    {
+        public int Id { get; set; }
         public string Name { get; set; }
         public List<Employee> Employees { get; set; }
-        //public override string ToString()
-        //{
-        //    return $"Name:{Name}, Employees Count:{Employees.Count}";
-        //}
+        public override string ToString()
+        {
+            return $"Id:{Id}, Name:{Name}, Employees Count:{Employees.Count}";
+        }
     }
     public class Employee
     {
         public int Id { get; set; }
-        public string Name { get; set; }        
+        public string Name { get; set; }
+        public int Age { get; set; }
         public override string ToString()
         {
-            return $"Id:{Id}, Name:{Name}";
+            return $"Id:{Id}, Name:{Name}, Age:{Age}";
         }
     }
-
     public partial class MainWindow : Window
     {
-        public ObservableCollection<Departament> Departaments;
+        const int departamentsCount = 10;
+        const int employeeCount = 20;
+
+        public ObservableCollection<Departament> Departaments = new ObservableCollection<Departament>();
         public ObservableCollection<Employee> Employees = new ObservableCollection<Employee>();
 
-        //Departament selectedDepartameent = new Departament();
-        //Employee selectedEmployee = new Employee();
+        Departament selectedDepartameent = new Departament();
+        Employee selectedEmployee = new Employee();
 
+        Random rnd = new Random();
         public MainWindow()
         {
-        InitializeComponent();
-            Departaments = new ObservableCollection<Departament>
-            {
-              new Departament {Name = "Департамент финансов" },
-              new Departament {Name = "Департамент по недропользованию" },
-              new Departament {Name = "Судебный департамент" },
-              new Departament {Name = "Департамент здравоохранения" }
-            };
-            ComboBoxDepartment.ItemsSource = Departaments;
-
+            InitializeComponent();
+            FillList();
+            Bindings();
         }
 
-        private void ComboBoxDepartment_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Bindings()
         {
-            
-            //ComboBox comboBox = (ComboBox)sender;
-            //selectedDepartameent = (Departament)comboBox.SelectedItem;
+            listBoxDepartament.ItemsSource = Departaments;
+            listBoxEmlployee.ItemsSource = Employees;
+            comboBoxSelectDepartament.ItemsSource = Departaments;
         }
 
-        NewEmployee _NewEmployee = new NewEmployee();
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void FillList()
         {
-            _NewEmployee = new NewEmployee
+            for (var i = 0; i < departamentsCount; i++)
             {
-                Owner = this,
-                Employee = new Employee(),
-                Departament = new Departament()
-            };
-            _NewEmployee.ShowDialog();
-            //_NewEmployee.Closed += NewEmployee_WindowClosed;
-            
-        }
-        
-        //private void NewEmployee_WindowClosed(object sender, EventArgs e)
-        //{            
-        //    foreach (var d in Departaments)
-        //    {
-        //        if (d == _NewEmployee.departament)
-        //            d.Employees.Add(new Employee
-        //            {
-        //                Id = d.Employees.Count + 1,                        
-        //                Name = _NewEmployee.employee.Name
-        //            });
-        //    }
-        //}
+                var employees = new List<Employee>(employeeCount);
+                for (var j = 0; j < employeeCount; j++)
+                {
+                    employees.Add(new Employee
+                    {
+                        Id = j,
+                        Name = $"Работник {i * 2 + 1}{j * 3 + 1}",
+                        Age = rnd.Next(30 + i, 50 + j)
+                    });
+                }
+                Departaments.Add(new Departament
+                {
+                    Id = i,
+                    Name = $"Депантамент {i + 1}",
+                    Employees = employees
+                });
+            }
 
+        }
+
+
+        //выбор департамента
+        private void ChangedDepartament(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count <= 0) return;
+            selectedDepartameent = (Departament)e.AddedItems[0];
+
+            Employees.Clear();
+            foreach (var v in selectedDepartameent.Employees)
+                Employees.Add(v);
+
+            textBoxDepartament.Text = $"Выбран департамент {selectedDepartameent.Name}";
+
+            textBoxDepartamentName.Text = selectedDepartameent.Name;
+
+        }
+
+        //изменяем имя выбранного департамента
+        private void buttonDepartamentName_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(textBoxDepartamentName.Text))
+            {
+                selectedDepartameent.Name = textBoxDepartamentName.Text;
+                Departaments[selectedDepartameent.Id] = selectedDepartameent;
+            }
+        }
+
+        //запоминаем выбранного сотрудника и вносим его данные на форму
+        private void listBoxEmlployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count <= 0) return;
+            selectedEmployee = (Employee)e.AddedItems[0];
+            textBoxEmployeeName.Text = selectedEmployee.Name;
+            textBoxEmployeeAge.Text = selectedEmployee.Age.ToString();
+            //ставим департамент сотрудника выбранным в комбобоксе
+            comboBoxSelectDepartament.SelectedItem = selectedDepartameent;
+        }
+
+        //изменяем данные сотрудника
+        private void buttonEmployeeSave_Click(object sender, RoutedEventArgs e)
+        {
+            //удаляем работника из департамента
+            foreach (var d in Departaments)
+            {
+                if (d.Employees.Contains(selectedEmployee))
+                {
+                    d.Employees.Remove(selectedEmployee);
+                }
+            }
+
+            //изменяем его данные
+            selectedEmployee.Name = textBoxEmployeeName.Text;
+            selectedEmployee.Age = Int32.Parse(textBoxEmployeeAge.Text);
+
+            //добавляем работника в выбранный департамент
+            foreach (var d in Departaments)
+            {
+                if (d == selectedDepartameent)
+                    d.Employees.Add(selectedEmployee);
+            }
+        }
+
+        //запоминаем департамент в который надо перенести работника
+        private void comboBoxSelectDepartament_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            selectedDepartameent = (Departament)comboBox.SelectedItem;
+        }
+
+        NewEmployee newEmployee = new NewEmployee();
+        private void buttonNewEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            newEmployee = new NewEmployee();
+            newEmployee.Owner = this;
+            newEmployee.comboBoxDepartaments.ItemsSource = Departaments;
+            newEmployee.employee = new Employee();
+            newEmployee.departament = new Departament();
+            newEmployee.ShowDialog();
+
+            newEmployee.Closed += ChildWindow_Closed;
+        }
+
+        private void ChildWindow_Closed(object sender, EventArgs e)
+        {
+            //добавляем работника в выбранный департамент при закрытии формы
+            foreach (var d in Departaments)
+            {
+                if (d == newEmployee.departament)
+                    d.Employees.Add(new Employee
+                    {
+                        Id = d.Employees.Count + 1,
+                        Age = newEmployee.employee.Age,
+                        Name = newEmployee.employee.Name
+                    });
+            }
+        }
     }
 }
