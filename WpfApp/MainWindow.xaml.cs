@@ -14,31 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace WpfApp
-{
-    /// <summary>
-    /// Логика взаимодействия для DepartmentWindow.xaml
-    /// </summary>
-
-    public class Departament
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public List<Employee> Employees { get; set; }
-        public override string ToString()
-        {
-            return $"Id:{Id}, Name:{Name}, Employees Count:{Employees.Count}";
-        }
-    }
-    public class Employee
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
-        public override string ToString()
-        {
-            return $"Id:{Id}, Name:{Name}, Age:{Age}";
-        }
-    }
+{    
     public partial class MainWindow : Window
     {
         const int departamentsCount = 10;
@@ -88,7 +64,6 @@ namespace WpfApp
             }
 
         }
-
 
         //выбор департамента
         private void ChangedDepartament(object sender, SelectionChangedEventArgs e)
@@ -166,12 +141,12 @@ namespace WpfApp
             newEmployee.comboBoxDepartaments.ItemsSource = Departaments;
             newEmployee.employee = new Employee();
             newEmployee.departament = new Departament();
-            newEmployee.ShowDialog();
+            newEmployee.Show();
 
-            newEmployee.Closed += ChildWindow_Closed;
+            newEmployee.Closed += Window_Closed;
         }
 
-        private void ChildWindow_Closed(object sender, EventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
             //добавляем работника в выбранный департамент при закрытии формы
             foreach (var d in Departaments)

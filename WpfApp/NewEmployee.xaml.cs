@@ -13,10 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace WpfApp
-{
-    /// <summary>
-    /// Логика взаимодействия для ChildWindow.xaml
-    /// </summary>
+{  
     public partial class NewEmployee : Window
     {
         public NewEmployee()
@@ -38,7 +35,6 @@ namespace WpfApp
             ComboBox comboBox = (ComboBox)sender;
             departament = (Departament)comboBox.SelectedItem;
         }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
