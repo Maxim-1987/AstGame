@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Configuration;
 
 namespace WpfApp
 {    
@@ -29,6 +30,8 @@ namespace WpfApp
         Random rnd = new Random();
         public MainWindow()
         {
+            //var connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WpfAppDB;Integrated Security=True";
+            const string connection_string_name = "Connection";
             InitializeComponent();
             FillList();
             Bindings();
