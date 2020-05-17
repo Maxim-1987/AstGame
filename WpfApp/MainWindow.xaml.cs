@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace WpfApp
 {    
@@ -28,11 +29,16 @@ namespace WpfApp
         Employee selectedEmployee = new Employee();
 
         Random rnd = new Random();
+
+        Database _Database = new Database();
+        
         public MainWindow()
         {
             //var connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WpfAppDB;Integrated Security=True";
-            const string connection_string_name = "Connection";
+            
+
             InitializeComponent();
+            _Database.InitializeDB();
             FillList();
             Bindings();
         }
