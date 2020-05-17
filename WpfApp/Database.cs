@@ -19,7 +19,7 @@ namespace WpfApp
 
         public const string __SqlCreateTableEmployee = @"
 
-        CREATE TABLE [dbo].[Employee]
+        if not exists( select * from dbo.sysobjects where id = object_id(N'Employee') and OBJECTPROPERTY(id, N'IsUserTable') = 1  )   CREATE TABLE [dbo].[Employee]
         (
         [Id] INT IDENTITY(1,1) NOT NULL,
         [NAME] NVARCHAR(MAX) NOT NULL,
@@ -29,7 +29,7 @@ namespace WpfApp
 
         public const string __SqlCreateTableDepartament = @"
 
-        CREATE TABLE [dbo].[Departament]
+        if not exists( select * from dbo.sysobjects where id = object_id(N'Departament') and OBJECTPROPERTY(id, N'IsUserTable') = 1  )   CREATE TABLE [dbo].[Departament]
         (
         [Id] INT IDENTITY(1,1) NOT NULL,
         [NAME] NVARCHAR(MAX) NOT NULL,        
