@@ -29,6 +29,7 @@ namespace WpfApp
         Random rnd = new Random();
         public MainWindow()
         {
+            var connection_string = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WpfAppDB;Integrated Security=True";
             InitializeComponent();
             FillList();
             Bindings();
